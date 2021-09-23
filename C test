@@ -1,0 +1,15 @@
+#include <stdio.h>
+
+int main()
+{
+	float a,b,c;
+	scanf("%f" "%f" "%f" , &a,&b,&c);
+	printf("長:%f\n",a);
+	printf("寬:%f\n",b);
+	printf("高:%f\n",c);
+	printf("周長:%f\n",a*4+b*4+c*4);
+	printf("面積:%f\n",a*b);
+	printf("表面積:%f\n" ,2*a*b+2*a*c+2*b*c);
+	printf("體積:%f\n", a*b*c);
+	return 0;
+}

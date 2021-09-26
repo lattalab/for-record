@@ -25,3 +25,22 @@ int main()
 				}
 				printf("\n");
 			}
+			//下半部
+			for(int a=1;a<=n/2;a++)
+			{
+				for(int b=1;b<=a;b++)
+				{
+					printf(" ");
+				}
+				for(int c=n-2;c>2*a-2;c--)
+				{
+					printf("*");
+				}
+				printf("\n");
+			} 
+			
+			printf("請輸入菱形對角線長度(必須是奇數)，離開請輸入0:");
+		} 
+	}
+	return 0;
+}

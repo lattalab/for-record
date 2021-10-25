@@ -1,0 +1,20 @@
+#include <stdio.h> 
+int main()
+{
+	int n,i,j,sum=0;
+	printf("請輸入1到40,000,000的整數 :");
+	scanf("%d",&n);
+	printf("下列為1到%d的完美數\n",n);
+	for(i=1;i<=n;i++)
+	{
+		for(j=1;j<i;j++)
+		{
+			if(i%j==0)
+			sum+=j;
+		}
+		if(i==sum)
+		printf("%d\n",i);
+		sum=0;
+	}
+	return 0;
+}

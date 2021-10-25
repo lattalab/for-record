@@ -1,0 +1,62 @@
+#include <stdio.h>
+int main()
+{
+	int a,count=0,countw=0;
+	int i,j,k,m; //迴圈的變數 
+	printf("input the number: ");
+	scanf("%d",&a);  //a是我們輸入的那個數 
+	int x = a -2; //為討論奇數情形所設立的變數
+
+	/*
+	奇數必須奇+偶 偶數則分偶+偶 跟 奇+奇 
+	2是唯一個偶數中的質數 >>
+	代表偶數只考慮兩個有質數性質的奇數相加
+	而奇數只能2(偶數)+是質數的奇數
+	有一個特例4只能拆2+2 
+	*/ 
+	
+	if(a%2 == 1) //1.奇數除2會餘1。  2.奇數只能拆2+X,x>=3 (只有這種可能) 
+	{
+		for(i =2;i<x;i++) //此迴圈用來確定x是否為奇數 
+		{
+			if(x%i==0)
+			{
+			 count++;
+			}
+		}
+		if(count==0) //count為零即代表 沒有其他比它自己小的整數整除它 
+		printf("%d can be written as 2 + %d\n",a,x); 
+	}
+	else if(a==4)
+	printf("%d can be written as 2 + 2\n");
+	else //此區為偶數 ，另外大於2的偶數皆可表示成兩質數相加 From 歌德巴赫猜想 
+	{
+		for(j = 3;j<(a/2)+1;j+=2) //第一個奇數 + 檢驗是否質數 
+		{
+			for( k=2;k<j;k++)
+			{
+				if(j%k==0)
+				count++;	
+			}	
+			if(count == 0) //開始討論第二個奇數 + 確認是否質數 ，防止搞混設定兩變數 
+			{	//能進來的J是質數 
+				int evenX= a -j;
+				for(m =2;m<evenX;m++)
+				{
+					if(evenX%m==0)
+					{
+					  countw++;	
+					}
+				}
+					if(countw==0)
+					{
+					  printf("%d can be written as %d + %d\n",a,j,evenX);  	
+					}	
+			}
+			//需重新設定變數 否則會有BUG 
+			count = 0;
+			countw = 0;	
+		}	
+	} 
+	return 0;
+}

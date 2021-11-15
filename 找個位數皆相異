@@ -1,0 +1,43 @@
+#include <stdio.h>
+int main()
+{
+	int n,a=1,i,j,digit=0,k,l,count=0;
+	
+	scanf("%d",&n);
+	for(i=1;i<=n;i++)
+	{
+		a=a*10;
+	}
+	int output =a;
+	for(j=a-1;j>0;j--)
+	{	
+		int temp=j;
+		int arr[a];
+		int b=0;
+		while(temp!=0)
+		{
+			digit++;
+			
+			arr[b]=temp%10;
+			temp/=10;
+			
+		
+			b++;
+		}
+		
+		for(k=0;k<digit;k++)
+		{
+			for(l=k+1;l<digit;l++)
+			{
+				if(arr[k]==arr[l])
+				count++;
+			}
+		}
+		if(count!=0)
+		output=output-1;
+		count=0;
+		digit=0;
+	}
+	printf("%d\n",output);
+	return 0;
+} 

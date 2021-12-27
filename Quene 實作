@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node {
+int value;   // ’\0’ represents empty stack
+struct node* next; // NULL represents bottom of stack
+};
+struct node *head=NULL;
+struct node *tail=NULL;
+void Enquene(int val);
+int Dequene(void);
+void traversal(void);
+int main()
+{
+	int num;
+	printf("Input(0 to dequene,-1 to traversal,-2 to end,others to enquene):\n");
+	while(1)
+	{
+		scanf("%d",&num);
+		if(num==-2)
+		break;
+		else if(num==0)
+		{
+			printf("跳出的值:%d\n",Dequene());
+		}
+		else if(num==-1)
+		{
+			traversal();
+		}
+		else
+		{
+			Enquene(num);
+		}
+	}
+	return 0;
+} 
+void Enquene(int val)
+{
+	struct node *news=(struct node *)malloc(sizeof(struct node));
+	news->value=val;
+	news->next=NULL;
+	news->next=tail;
+	tail=news;
+	if(head==NULL)
+	head=news;
+}
+int Dequene(void)
+{
+	struct node *temp;
+	if(head==NULL)
+	{
+	printf("Nothing to dequene.\n");
+	return -1;	
+	}
+	struct node *tra=tail;
+	int a=head->value;
+	temp=head;
+	if(head==tail)
+	{
+	free(temp);
+	head=NULL;
+	tail=NULL;
+	return a;
+	}
+	while(tra->next!=head)
+	{
+		tra=tra->next;
+	}
+	head=tra;
+	tra->next=NULL;
+	free(temp);
+	return a;
+}
+void traversal(void)
+{
+	struct node *current=tail;
+	if(tail==NULL)
+	{
+	printf("Nothing to show!!\n");
+	return;	
+	}
+	printf("From tail to head:");
+	while(current!=NULL)
+	{
+		printf("%d ",current->value);
+		current=current->next;
+	}
+	printf("\n");
+}

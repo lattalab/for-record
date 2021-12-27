@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <math.h>
+void area(double x,double y,double *z) 
+{
+ *z =x*y;
+}
+int main(void) {
+ FILE *fp;
+ fp = fopen("./output.txt","w");
+ double pi, sum = 0, a, b ,getarea = 0;
+ int n;
+ pi = acos(-1);
+ 
+ fprintf(fp, "n area\n");
+int i;
+ for (i = 1; i <= 200; i++) {
+  n = i*100;
+  a = (pi/2)/(double)n;
+  int k;
+  for (k = 1; k <= n; k++) {
+  b = sin(a*(double)k);
+  area(a,b,&getarea);
+  sum=sum+getarea;
+  }
+   fprintf(fp, "%d %lf\n", n, sum);
+   sum=0;
+ }
+ if(fp!=NULL)
+ printf("File open successfully\n");
+ fclose(fp);
+return 0;
+}

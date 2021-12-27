@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node {
+char value;   // ’\0’ represents empty stack
+struct node* next; // NULL represents bottom of stack
+};
+struct node *head=NULL;
+void push(char val);
+char pop(void);
+int empty(void); // 0 for empty, otherwise 1
+int main()
+{
+	char ch,temp;
+	int a=-1;
+	printf("Input 0 to pop.\n");
+	while(1)
+	{
+		fflush(stdin);
+		scanf("%c",&ch);
+		if(ch!='0')
+		{
+		push(ch);
+		}
+		else 
+		{
+		a=empty();
+		if(a==1)
+		printf("跳出的元素:%c\n",pop());
+		else
+		printf("The stack is empty now.\n");
+		}
+	}
+	return 0;
+} 
+void push(char val)
+{
+	struct node *news=(struct node *)malloc(sizeof(struct node));
+	news->value=val;
+	news->next=NULL;
+	news->next=head;
+	head=news;
+}
+char pop(void)
+{
+	struct node *temp=NULL;
+	char a=head->value;
+	temp=head;
+	head=head->next;
+	free(temp);
+	return a;
+}
+int empty(void)
+{
+	if(head==NULL)
+	return 0;
+	else
+	return 1;
+}

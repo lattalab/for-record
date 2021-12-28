@@ -1,0 +1,126 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node{
+	int value;
+	struct node *next;
+};
+typedef struct node Node;
+Node *head=NULL;
+Node *tail=NULL;
+void insert(int val)
+{
+	Node *news=malloc(sizeof(Node));
+	news->value=val;
+	news->next=NULL;
+	if(head==NULL) //0個 
+	{
+	head=news;
+	tail=news;
+	return;	
+	}
+	//1個 或 最大最小 
+	if(tail->value>val)
+	{
+	news->next=tail;
+	tail=news;
+	return;	
+	}
+	if(head->value<val)
+	{
+		head->next=news;
+		head=news;
+		return;
+	}
+	Node *current=tail;
+	while(!((current->value<val)&&(current->next->value>val)))
+	{
+		current=current->next;
+	}
+	news->next=current->next;
+	current->next=news;
+}
+Node *search(int key)
+{
+	Node *current=tail;
+	while((current!=NULL)&&(current->value!=key))
+	{
+	current=current->next;
+	}
+	return current;
+}
+void Delete(int val)
+{
+	Node *temp=search(val);
+	if(temp==NULL) //沒有這個元素 
+	{
+		printf("can't find the value in linked list.\n");
+		return;
+	}
+	if(temp==tail) //刪尾巴 
+	{
+		tail=tail->next;
+		free(temp);
+		return;
+	}
+	Node *current=tail;
+	while(current->next!=temp)
+	{
+		current=current->next;
+	}
+	current->next=temp->next;
+	if(temp==head) //刪掉頭的話 要改頭 
+	{
+		head=current;
+		head->next=NULL;
+	}
+	free(temp);
+}
+void traversal(void)
+{
+	Node *current=tail;
+	while(current!=NULL)
+	{
+		printf("%d , %p \\ ",current->value,current);
+		current=current->next;
+	}
+	printf("\n");
+}
+int main()
+{
+	int arr[5]={10,23,77,33,1};
+	int i;
+	printf("放入5元素\n");
+	for(i=0;i<5;i++)
+	insert(arr[i]);	
+	
+	traversal();
+	system("pause");
+	Node *test=search(10);
+	printf("\n找到10所在的位置:%p\n",test);
+	system("pause");
+	printf("\n刪尾\n");
+	Delete(77);
+	traversal();
+	system("pause");
+	test=search(111);
+	printf("\n111的位置:%p\n",test);
+	system("pause");
+	printf("\n刪掉一個不存在的元素\n");
+	Delete(111);
+	traversal();
+	system("pause");
+	printf("\n刪頭\n");
+	Delete(1);
+	traversal();
+	system("pause");
+	printf("\n刪中間\n");
+	Delete(23);
+	traversal();
+	system("pause");
+	printf("\n放入3元素\n");
+	insert(109);
+	insert(2111);
+	insert(17);
+	traversal();
+	return 0;
+} 
